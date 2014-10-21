@@ -3,6 +3,7 @@ from sage.ext.fast_callable import fast_callable
 from sage.rings.semirings.non_negative_integer_semiring import NN
 from sage.rings.real_mpfr import RealField
 from sage.misc.functional import numerical_approx as N
+from sage.functions.log import exp
 
 
 '''
