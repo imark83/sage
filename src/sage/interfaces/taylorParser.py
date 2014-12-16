@@ -285,13 +285,9 @@ def createCodeList (list1, list2, constList1, f, pars):
 
 			# we set the const argument in the first place
 			if constA:
-				if oper == 'div':
-					oper = 'inv'
 				oper += '_c'
 				bb, aa = aa,bb
 			elif constB:
-				if oper == 'div':
-					oper = 'mul'
 				oper += '_c'
 			list3.append ((oper, aa, bb))
 
@@ -394,7 +390,7 @@ def createParsedList (list1, list3, f):
 			string += 'dp_powAD (i, l[{}], '.format(i) + codeLine[1] + ', ' + codeLine[2] + ');'
 		elif codeLine[0] == 'div':
 			string += 'dp_divAD (i, l[{}], '.format(i) + codeLine[1] + ', ' + codeLine[2] + ');'
-		elif codeLine[0] == 'inv_c':
+		elif codeLine[0] == 'div_c':
 			string += 'dp_invAD (i, l[{}], '.format(i) + codeLine[1] + ', ' + codeLine[2] + ');'
 		elif codeLine[0] == 'exp':
 			string += 'dp_expAD (i, l[{}], '.format(i) + codeLine[1] + ');'
@@ -451,7 +447,7 @@ def generateCode (f, pars):
 
 	parsedConstList = createParsedConstList (constList3)
 	parsedList = createParsedList (list1, list3, f)
-	vars = f[0].variables ()
+	vars = f[0].arguments ()
 	auxSet = set(flatten([i.variables() for i in f]))	# set of variables in f
 	if set ([vars[0]]).issubset (auxSet):				# non autonomous system
 		print '\tdouble T[order];'
